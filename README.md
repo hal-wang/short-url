@@ -11,18 +11,16 @@
    - 原地址： `https://zhuanlan.zhihu.com/p/91947139`
 2. 一键部署地址
    - 短地址： <https://s.hal.wang/sud>
-   - 原地址： `https://console.cloud.tencent.com/tcb/env/index?action=CreateAndDeployCloudBaseProject&appUrl=https%3A%2F%2Fgithub.com%2Fhal-wang%2Fcloudbase-access&workDir=demo%2Fshort-url&branch=main`
+   - 原地址： `https://console.cloud.tencent.com/tcb/env/index?action=CreateAndDeployCloudBaseProject&appUrl=https%3A%2F%2Fgithub.com%2Fhal-wang%2Fshort-url&branch=main`
 
 ## 改用自己的域名，你需要做：
 
-### 一键部署
+1. 一键部署 [![](https://main.qcloudimg.com/raw/67f5a389f1ac6f3b4d04c7256438e44f.svg)](https://console.cloud.tencent.com/tcb/env/index?action=CreateAndDeployCloudBaseProject&appUrl=https%3A%2F%2Fgithub.com%2Fhal-wang%2Fshort-url&branch=main)
 
-[![](https://main.qcloudimg.com/raw/67f5a389f1ac6f3b4d04c7256438e44f.svg)](https://console.cloud.tencent.com/tcb/env/index?action=CreateAndDeployCloudBaseProject&appUrl=https%3A%2F%2Fgithub.com%2Fhal-wang%2Fshort-url&branch=main)
+2. 配置 HTTP 访问服务
 
-### 配置 HTTP 访问服务
-
-1. 添加自定义域名，如 `s.hal.wang`
-2. 添加触发路径 `/w`，关联资源为静态托管，以开启网站功能，如 `s.hal.wang/w` 。（可选，不设置则不使用网站）
+   - 添加自定义域名，如 `s.hal.wang`
+   - 添加触发路径 `/w`，关联资源为静态托管，以开启网站功能，如 `s.hal.wang/w` 。（可选，不设置则不使用网站）
 
 ## 注意事项
 
