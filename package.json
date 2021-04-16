@@ -1,9 +1,26 @@
 {
   "name": "short-url",
+  "description": "Simplify URLs with your domain",
+  "homepage": "https://github.com/hal-wang/short-url",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hal-wang/short-url"
+  },
   "scripts": {
     "deploy": "tcb login && tcb framework deploy"
   },
-  "keywords": [],
+  "keywords": [
+    "cloudbase-access",
+    "cloudbase",
+    "restful-api",
+    "serverless",
+    "nodejs",
+    "typescript"
+  ],
+  "bugs": {
+    "url": "https://github.com/hal-wang/short-url/issues",
+    "email": "support@hal.wang"
+  },
   "author": "hal-wang",
   "license": "MIT"
 }
