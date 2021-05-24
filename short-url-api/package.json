@@ -11,8 +11,8 @@
     "@types/node": "^15.6.0",
     "@cloudbase/node-sdk": "^2.5.2",
     "@hal-wang/cloudbase-access": "^2.0.1",
-    "@hal-wang/cloudbase-access-middleware-app": "^1.0.0",
-    "@hal-wang/cloudbase-access-middleware-dbhelper": "^1.0.0",
+    "@hal-wang/cloudbase-access-middleware-app": "^1.0.1",
+    "@hal-wang/cloudbase-access-middleware-dbhelper": "^1.0.1",
     "moment": "^2.29.1",
     "nanoid": "^3.1.23"
   },
