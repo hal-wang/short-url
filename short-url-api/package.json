@@ -2,31 +2,30 @@
   "name": "short-url-api",
   "version": "0.0.1",
   "scripts": {
-    "build:test": "sh build.sh test",
-    "build": "sh build.sh v1",
-    "deploy:test": "sh deploy.sh test",
-    "deploy": "sh deploy.sh v1",
+    "build": "cba-build",
+    "deploy": "cba-build && cd .. && tcb login tcb fn deploy v1 --force",
     "eslint": "eslint . --ext .ts",
     "test": "jest"
   },
   "dependencies": {
-    "@cloudbase/node-sdk": "^2.5.0",
-    "@hal-wang/cloudbase-access": "^1.2.3",
-    "fs": "0.0.1-security",
+    "@types/node": "^15.6.0",
+    "@cloudbase/node-sdk": "^2.5.2",
+    "@hal-wang/cloudbase-access": "^2.0.1",
+    "@hal-wang/cloudbase-access-middleware-app": "^1.0.0",
+    "@hal-wang/cloudbase-access-middleware-dbhelper": "^1.0.0",
     "moment": "^2.29.1",
-    "nanoid": "^3.1.22"
+    "nanoid": "^3.1.23"
   },
   "devDependencies": {
-    "@types/jest": "^26.0.22",
-    "@types/node": "^14.14.37",
-    "@typescript-eslint/eslint-plugin": "^4.21.0",
-    "@typescript-eslint/parser": "^4.21.0",
-    "eslint": "^7.23.0",
-    "eslint-config-prettier": "^8.1.0",
-    "eslint-plugin-prettier": "^3.3.1",
+    "@types/jest": "^26.0.23",
+    "@typescript-eslint/eslint-plugin": "^4.24.0",
+    "@typescript-eslint/parser": "^4.24.0",
+    "eslint": "^7.27.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
     "jest": "^26.6.3",
-    "prettier": "^2.2.1",
-    "ts-jest": "^26.5.4",
+    "prettier": "^2.3.0",
+    "ts-jest": "^26.5.6",
     "typescript": "^4.2.4"
   }
 }

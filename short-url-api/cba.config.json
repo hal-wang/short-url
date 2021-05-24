@@ -1,0 +1,14 @@
+{
+  "router": {
+    "dir": "controllers",
+    "strict": true
+  },
+  "ts": {
+    "static": [
+      {
+        "source": "static",
+        "target": "static"
+      }
+    ]
+  }
+}

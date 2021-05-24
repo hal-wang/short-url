@@ -1,4 +1,4 @@
-import { Action, HttpResult } from "@hal-wang/cloudbase-access";
+import { Action } from "@hal-wang/cloudbase-access";
 import Collections from "../../lib/Collections";
 import UrlItem from "../../models/UrlItem";
 import { readFileSync } from "fs";
@@ -16,13 +16,14 @@ import { readFileSync } from "fs";
  * @@@302 success
  */
 export default class extends Action {
-  async do(): Promise<HttpResult> {
-    const id = this.requestParams.query.id;
+  async invoke(): Promise<void> {
+    const id = this.ctx.req.query.id;
     if (!id) {
       return this.errMsg(404, "invalid id");
     }
     if (id == "w" || id == "web") {
-      return this.redirect("w/");
+      this.redirect("w/");
+      return;
     }
 
     const res = await Collections.url.doc(id).get();
@@ -44,14 +45,14 @@ export default class extends Action {
       }
     }
 
-    return this.redirect(url.long, 302);
+    this.redirect(url.long, 302);
   }
 
-  errMsg(code: number, msg: string): HttpResult {
+  errMsg(code: number, msg: string): void {
     let html = readFileSync(`${process.cwd()}/static/warning.html`, "utf-8");
     html = html.replace("{{warning-msg}}", msg);
 
-    return new HttpResult(code, html, {
+    this.res(code, html, {
       "content-type": "text/html",
     });
   }

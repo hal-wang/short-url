@@ -1,4 +1,4 @@
-import { Action, HttpResult } from "@hal-wang/cloudbase-access";
+import { Action } from "@hal-wang/cloudbase-access";
 import Collections from "../lib/Collections";
 import * as nanoid from "nanoid";
 import Validate from "../lib/Validate";
@@ -21,15 +21,15 @@ import Validate from "../lib/Validate";
  * @@@url {string} short url
  */
 export default class extends Action {
-  async do(): Promise<HttpResult> {
-    const url = this.requestParams.params.url;
-    const custom = this.requestParams.params.custom;
-    const expire = Number(this.requestParams.params.expire);
-    const limit = Number(this.requestParams.params.limit);
+  async invoke(): Promise<void> {
+    const url = this.ctx.req.params.url;
+    const custom = this.ctx.req.params.custom;
+    const expire = Number(this.ctx.req.params.expire);
+    const limit = Number(this.ctx.req.params.limit);
 
     if (!url || !Validate.isUrl(url)) {
-      return this.redirect(`/w`, 302);
-      // return this.badRequestMsg({ message: "Incorrect url format" });
+      this.redirect(`/w`, 302);
+      return;
     }
 
     const obj = <Record<string, unknown>>{
@@ -46,10 +46,12 @@ export default class extends Action {
     let id: string;
     if (!!custom) {
       if (custom == "w" || custom == "web") {
-        return this.badRequestMsg({ message: "the custom url is exist" });
+        this.badRequestMsg({ message: "the custom url is exist" });
+        return;
       }
       if (await this.isExist(custom)) {
-        return this.badRequestMsg({ message: "the custom url is exist" });
+        this.badRequestMsg({ message: "the custom url is exist" });
+        return;
       } else {
         id = custom;
       }
@@ -58,11 +60,12 @@ export default class extends Action {
     }
     await Collections.url.doc(id).set(obj);
 
-    const origin = this.requestParams.headers["short-url-origin"];
+    const origin = this.ctx.req.headers["short-url-origin"];
     if (!origin) {
-      return this.badRequestMsg({ message: "no short-url-origin" });
+      this.badRequestMsg({ message: "no short-url-origin" });
+      return;
     }
-    return this.ok({
+    this.ok({
       url: `${origin}/${id}`,
     });
   }

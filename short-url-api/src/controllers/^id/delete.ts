@@ -1,4 +1,4 @@
-import { Action, HttpResult } from "@hal-wang/cloudbase-access";
+import { Action } from "@hal-wang/cloudbase-access";
 import Collections from "../../lib/Collections";
 
 /**
@@ -15,8 +15,8 @@ import Collections from "../../lib/Collections";
  * @@@403 not open
  */
 export default class extends Action {
-  async do(): Promise<HttpResult> {
-    return this.forbiddenMsg({ message: "not open" });
+  async invoke(): Promise<void> {
+    this.forbiddenMsg({ message: "not open" });
 
     // const id = this.requestParams.query.id;
     // if (!id) {

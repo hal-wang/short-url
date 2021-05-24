@@ -1,6 +1,7 @@
-import { AppInstance } from "@hal-wang/cloudbase-access";
 import { Database } from "@cloudbase/node-sdk";
+import { Startup } from "@hal-wang/cloudbase-access";
 import { isTest } from "../Global";
+import * as tcb from "@cloudbase/node-sdk";
 
 export default class Collections {
   private static getCollection(
@@ -10,8 +11,7 @@ export default class Collections {
     if (isTest) name = `${collection}_test`;
     else name = collection;
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return AppInstance.instance.db.collection(name);
+    return Startup.current.ctx.getBag<tcb.Database.Db>("db").collection(name);
   }
 
   static get url(): Database.CollectionReference {

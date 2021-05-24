@@ -2,7 +2,7 @@
   "version": "2.0",
   "envId": "{{env.ENV_ID}}",
   "$schema": "https://framework-1258016615.tcloudbaseapp.com/schema/latest.json",
-  "functionRoot": "./functions",
+  "functionRoot": "./short-url-api/dist",
   "framework": {
     "name": "short-url",
     "hooks": {
@@ -18,7 +18,7 @@
       "function": {
         "use": "@cloudbase/framework-plugin-function",
         "inputs": {
-          "functionRootPath": "functions",
+          "functionRootPath": "./short-url-api/dist",
           "functions": [
             {
               "name": "v1"
