@@ -7,10 +7,13 @@
     "url": "https://github.com/hal-wang/short-url"
   },
   "scripts": {
-    "deploy": "tcb login && tcb framework deploy"
+    "publish": "tcb login && tcb framework deploy"
   },
   "keywords": [
-    "cloudbase-access",
+    "sfa",
+    "@sfajs/router",
+    "@sfajs/cloudbase",
+    "short-url",
     "cloudbase",
     "restful-api",
     "serverless",

@@ -5,12 +5,11 @@
     ],
     "module": "commonjs",
     "declaration": true,
-    "outDir": "./dist/v1",
+    "outDir": "./dist/v2",
     "target": "esnext",
     "strict": true
   },
   "exclude": [
-    "test",
     "dist"
   ]
 }

@@ -1,4 +1,4 @@
-import { Action } from "@hal-wang/cloudbase-access";
+import { Action } from "@sfajs/router";
 import Collections from "../../lib/Collections";
 
 /**

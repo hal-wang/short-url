@@ -1,4 +1,4 @@
-import { Action } from "@hal-wang/cloudbase-access";
+import { Action } from "@sfajs/router";
 import Collections from "../../lib/Collections";
 import UrlItem from "../../models/UrlItem";
 import { readFileSync } from "fs";
@@ -52,8 +52,8 @@ export default class extends Action {
     let html = readFileSync(`${process.cwd()}/static/warning.html`, "utf-8");
     html = html.replace("{{warning-msg}}", msg);
 
-    this.res(code, html, {
-      "content-type": "text/html",
-    });
+    this.ctx.res.status = code;
+    this.ctx.res.body = html;
+    this.ctx.res.setHeader("content-type", "text/html");
   }
 }

@@ -21,11 +21,11 @@
           "functionRootPath": "./short-url-api/dist",
           "functions": [
             {
-              "name": "v1"
+              "name": "v2"
             }
           ],
           "servicePaths": {
-            "v1": "/"
+            "v2": "/"
           }
         }
       },

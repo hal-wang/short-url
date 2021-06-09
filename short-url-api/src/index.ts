@@ -1,6 +1,6 @@
-import { Startup } from "@hal-wang/cloudbase-access";
-import "@hal-wang/cloudbase-access-middleware-app";
-import "@hal-wang/cloudbase-access-middleware-dbhelper";
+import SfaCloudbase from "@sfajs/cloudbase";
+import "@sfajs/router";
+import Collections from "./lib/Collections";
 
 export const main = async (
   event: Record<string, unknown>,
@@ -8,14 +8,18 @@ export const main = async (
 ): Promise<unknown> => {
   console.log("env", event, context);
 
-  return await new Startup(event, context)
+  return await new SfaCloudbase(event, context)
     .use(async (ctx, next) => {
       ctx.res.headers.version = require("./package.json").version;
       ctx.res.headers.demo = "short-url";
       await next();
     })
-    .useApp()
-    .useDbhelper()
+    .useCloudbaseApp()
+    .useCloudbaseDbhelper()
+    .use(async (ctx, next) => {
+      Collections.ctx = ctx;
+      await next();
+    })
     .useRouter()
-    .invoke();
+    .run();
 };
