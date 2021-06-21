@@ -11,5 +11,11 @@
   },
   "exclude": [
     "dist"
+  ],
+  "static": [
+    {
+      "source": "static",
+      "target": "static"
+    }
   ]
 }
