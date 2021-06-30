@@ -3,29 +3,12 @@ import Collections from "../lib/Collections";
 import * as nanoid from "nanoid";
 import Validate from "../lib/Validate";
 
-/**
- * @action short-url
- *
- * create a short url
- *
- * @input
- * @@params
- * @@@url {string} long url
- * @@@expire {number} expire time
- * @@@custom {string} custom url
- * @@@limit {number} the limit of short url
- * @output
- * @@codes
- * @@@200 success
- * @@body
- * @@@url {string} short url
- */
 export default class extends Action {
   async invoke(): Promise<void> {
-    const url = this.ctx.req.params.url;
-    const custom = this.ctx.req.params.custom;
-    const expire = Number(this.ctx.req.params.expire);
-    const limit = Number(this.ctx.req.params.limit);
+    const url = this.ctx.req.query.url;
+    const custom = this.ctx.req.query.custom;
+    const expire = Number(this.ctx.req.query.expire);
+    const limit = Number(this.ctx.req.query.limit);
 
     if (!url || !Validate.isUrl(url)) {
       this.redirect(`/w`, 302);
