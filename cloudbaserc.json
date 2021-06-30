@@ -9,7 +9,6 @@
       "preDeploy": {
         "type": "execCommand",
         "commands": [
-          "npm install -g typescript",
           "cd short-url-api && npm install --prefer-offline --no-audit --progress=false && npm run build"
         ]
       }

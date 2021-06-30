@@ -1,19 +1,6 @@
 import { Action } from "@sfajs/router";
 import Collections from "../../lib/Collections";
 
-/**
- * @action delete
- *
- * delete short url
- *
- * @input
- * @@query
- * @@@id {string} short url id
- * @output
- * @@codes
- * @@@204 success
- * @@@403 not open
- */
 export default class extends Action {
   async invoke(): Promise<void> {
     this.forbiddenMsg({ message: "not open" });

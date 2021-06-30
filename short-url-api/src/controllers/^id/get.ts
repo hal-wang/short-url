@@ -3,18 +3,6 @@ import Collections from "../../lib/Collections";
 import UrlItem from "../../models/UrlItem";
 import { readFileSync } from "fs";
 
-/**
- * @action long-url
- *
- * get source long url
- *
- * @input
- * @@query
- * @@@id {string} short url id
- * @output
- * @@codes
- * @@@302 success
- */
 export default class extends Action {
   async invoke(): Promise<void> {
     const id = this.ctx.req.query.id;
