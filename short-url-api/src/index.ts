@@ -18,7 +18,6 @@ const version = (() => {
 })();
 
 export function setStartup<T extends Startup>(startup: T, dev: boolean): T {
-  console.log("process.env", process.env);
   dotenv.config({
     path: "./.env",
   });
@@ -27,7 +26,6 @@ export function setStartup<T extends Startup>(startup: T, dev: boolean): T {
       path: "./.env.local",
     });
   }
-  console.log("process.env", process.env);
 
   return startup
     .use(async (ctx, next) => {
