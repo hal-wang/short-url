@@ -1,7 +1,12 @@
-import SfaCloudbase from "@sfajs/cloudbase";
+import { SfaCloudbase } from "@sfajs/cloudbase";
+import { Startup } from "@sfajs/core";
+import { InjectType } from "@sfajs/inject";
+import "@sfajs/inject";
 import "@sfajs/router";
-import Collections from "./lib/Collections";
+import "@sfajs/req-deco";
 import * as fs from "fs";
+import { CbappService } from "./services/cbapp.service";
+import * as dotenv from "dotenv";
 
 const version = (() => {
   let path = "./package.json";
@@ -12,20 +17,37 @@ const version = (() => {
   return JSON.parse(pkgStr).version;
 })();
 
-const startup = new SfaCloudbase()
-  .use(async (ctx, next) => {
-    ctx.res.setHeader("version", version);
-    ctx.res.setHeader("demo", "short-url");
-    await next();
-  })
-  .useCloudbaseApp()
-  .useCloudbaseDbhelper()
-  .use(async (ctx, next) => {
-    Collections.ctx = ctx;
-    await next();
-  })
-  .useRouter();
+export function setStartup<T extends Startup>(startup: T, dev: boolean): T {
+  console.log("process.env", process.env);
+  dotenv.config({
+    path: "./.env",
+  });
+  if (dev) {
+    dotenv.config({
+      path: "./.env.local",
+    });
+  }
+  console.log("process.env", process.env);
 
+  return startup
+    .use(async (ctx, next) => {
+      ctx.res.setHeader("version", version);
+      ctx.res.setHeader("demo", "short-url");
+      await next();
+    })
+    .useInject()
+    .inject(CbappService, CbappService, InjectType.Singleton)
+    .useReqDeco()
+    .use(async (ctx, next) => {
+      ctx.setHeader("h1", 1);
+      await next();
+    })
+    .useRouter({
+      dir: dev ? "src/actions" : "actions",
+    });
+}
+
+const startup = setStartup(new SfaCloudbase(), false);
 export const main = async (
   event: Record<string, unknown>,
   context: Record<string, unknown>

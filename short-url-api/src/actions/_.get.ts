@@ -1,16 +1,20 @@
+import { Inject } from "@sfajs/inject";
 import { Action } from "@sfajs/router";
-import Collections from "../lib/Collections";
 import * as nanoid from "nanoid";
-import Validate from "../lib/Validate";
+import { CollectionService } from "../services/collection.service";
+import { isUrl } from "../utils/validate";
 
 export default class extends Action {
+  @Inject
+  private readonly collectionService!: CollectionService;
+
   async invoke(): Promise<void> {
     const url = this.ctx.req.query.url;
     const custom = this.ctx.req.query.custom;
     const expire = Number(this.ctx.req.query.expire);
     const limit = Number(this.ctx.req.query.limit);
 
-    if (!url || !Validate.isUrl(url)) {
+    if (!url || !isUrl(url)) {
       this.redirect(`/w`, 302);
       return;
     }
@@ -41,7 +45,7 @@ export default class extends Action {
     } else {
       id = await this.getNewId();
     }
-    await Collections.url.doc(id).set(obj);
+    await this.collectionService.url.doc(id).set(obj);
 
     const origin = this.ctx.req.headers["short-url-origin"];
     if (!origin) {
@@ -70,7 +74,7 @@ export default class extends Action {
   }
 
   async isExist(id: string): Promise<boolean> {
-    const countRes = await Collections.url
+    const countRes = await this.collectionService.url
       .where({
         _id: id,
       })

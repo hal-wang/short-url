@@ -1,7 +1,11 @@
+import { Inject } from "@sfajs/inject";
 import { Action } from "@sfajs/router";
-import Collections from "../../lib/Collections";
+import { CollectionService } from "../../services/collection.service";
 
 export default class extends Action {
+  @Inject
+  private readonly collectionService!: CollectionService;
+
   async invoke(): Promise<void> {
     this.forbiddenMsg({ message: "not open" });
 
@@ -18,7 +22,7 @@ export default class extends Action {
   }
 
   async isExist(id: string): Promise<boolean> {
-    const countRes = await Collections.url
+    const countRes = await this.collectionService.url
       .where({
         _id: id,
       })

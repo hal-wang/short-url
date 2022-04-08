@@ -6,11 +6,14 @@
     "module": "commonjs",
     "declaration": true,
     "outDir": "./dist/v2",
-    "target": "esnext",
-    "strict": true
+    "target": "es2017",
+    "strict": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
   },
   "exclude": [
-    "dist"
+    "dist",
+    "http.ts"
   ],
   "static": [
     {

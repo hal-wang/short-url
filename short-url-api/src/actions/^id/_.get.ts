@@ -1,11 +1,15 @@
 import { Action } from "@sfajs/router";
-import Collections from "../../lib/Collections";
-import UrlItem from "../../models/UrlItem";
+import UrlItem from "../../models/url-item";
 import { readFileSync } from "fs";
+import { Inject } from "@sfajs/inject";
+import { CollectionService } from "../../services/collection.service";
 
 export default class extends Action {
+  @Inject
+  private readonly collectionService!: CollectionService;
+
   async invoke(): Promise<void> {
-    const id = this.ctx.req.query.id;
+    const id = this.ctx.req.params.id;
     if (!id) {
       return this.errMsg(404, "invalid id");
     }
@@ -14,7 +18,7 @@ export default class extends Action {
       return;
     }
 
-    const res = await Collections.url.doc(id).get();
+    const res = await this.collectionService.url.doc(id).get();
     if (!res.data || !res.data.length) {
       return this.errMsg(404, "the id is not exist");
     }
@@ -27,7 +31,7 @@ export default class extends Action {
       if (!url.limit) {
         return this.errMsg(403, "the url is out of limit");
       } else {
-        await Collections.url.doc(id).update({
+        await this.collectionService.url.doc(id).update({
           limit: url.limit - 1,
         });
       }
