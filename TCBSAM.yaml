@@ -1,0 +1,72 @@
+TCBSAMFormatVersion: '2020-06-15'
+License: MIT
+Description: 基于 CloudBase Framework 构建
+Category: CloudApp
+Tags: []
+SourceUrl: 'https://github.com/Tencent/cloudbase-framework'
+ReleaseNotesUrl: 'https://github.com/Tencent/cloudbase-framework/releases'
+IconUrl: >-
+  https://main.qcloudimg.com/raw/f87b49914efe502722f9aa128f5d8865/hello_world.svg
+IntroUrl: 'https://cloud.tencent.com/document/product/876/44547'
+ChangeLog:
+  - Title: 1.0.0
+    Content:
+      - 初次发布
+Author:
+  AuthorName: Tencent CloudBase
+  Email: cloudbase@tencent.com
+  Url: 'https://github.com/Tencent/cloudbase-framework'
+Contributors:
+  - AuthorName: Tencent CloudBase
+    Email: cloudbase@tencent.com
+    Url: 'https://github.com/Tencent/cloudbase-framework'
+Name: short-url
+Version: 1.0.0
+DisplayName: short-url
+Globals:
+  Environment:
+    Variables: {}
+SourceDir: .
+EntryPoint:
+  - Label: 服务地址
+    EntryType: HttpService
+    HttpEntryPath: /
+  - Label: 网站入口
+    EntryType: StaticStore
+    HttpEntryPath: /
+Resources:
+  V3:
+    Type: 'CloudBase::Function'
+    Properties:
+      Handler: index.main
+      Description: 无服务器执行环境，帮助您在无需购买和管理服务器的情况下运行代码
+      Runtime: Nodejs10.15
+      FunctionName: v3
+      MemorySize: 128
+      Timeout: 5
+      Environment:
+        Variables: {}
+      VpcConfig: {}
+      HttpPath: /
+      InstallDependency: true
+      CodeUri: 'extension://18f7d8400b13454a81162e2d84f321a9.zip'
+      CodeSecret: false
+      Role: TCB_QcsRole
+  Website:
+    Type: 'CloudBase::StaticStore'
+    Properties:
+      Description: 为开发者提供静态网页托管的能力，包括HTML、CSS、JavaScript、字体等常见资源。
+      CodeUri: 'extension://44d88a9a1ebf4759a9e49d432b932c84.zip'
+      DeployPath: /
+  ConfigEnv:
+    Type: 'CloudBase::StaticStore'
+    Properties:
+      Description: 配置文件
+      CodeUri: 'extension://6315c96dc3574b809afdbccc47641736.zip'
+      DeployPath: /
+  SHORT_URL:
+    Type: 'CloudBase::FlexDB'
+    Properties:
+      Description: 云开发 NoSQL 数据库
+      CollectionName: short-url
+EnvType: PostPay
