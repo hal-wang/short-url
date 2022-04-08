@@ -1,58 +1,55 @@
-import axios from "axios";
-import { message } from "ant-design-vue";
+import axios, { AxiosError, AxiosRequestConfig, AxiosRequestHeaders, Method } from 'axios';
+import { message } from 'ant-design-vue';
 
-function getBaseUrl() {
-  if (process.env.NODE_ENV == "development") {
-    return process.env.VUE_APP_PROXY_URL;
-  } else {
-    const tcbEnv = (window as any)._tcbEnv;
-    return `https://${tcbEnv.TCB_SERVICE_DOMAIN}`;
-  }
+export type ErrorMessageMode = 'none' | 'modal' | 'message' | undefined;
+
+export interface ReqParams {
+  url?: string;
+  data?: any;
+  params?: Record<string, unknown>;
+  headers?: AxiosRequestHeaders;
+  errorMessageMode?: ErrorMessageMode;
 }
 
-const service = axios.create({
-  baseURL: getBaseUrl(),
-  timeout: 20000, // request timeout
+const apiUrl = import.meta.env.VITE_GLOB_API_URL;
+const apiProxyPrefix = import.meta.env.VITE_GLOB_API_PROXY_PREFIX;
+
+console.log('url', apiUrl, apiProxyPrefix);
+const baseRequest = axios.create({
+  baseURL: apiUrl + (apiProxyPrefix || ''),
+  timeout: 10 * 1000,
 });
 
-service.interceptors.request.use(
-  async (config) => {
-    config.headers["content-type"] = "application/json";
-    config.headers[
-      "short-url-origin"
-    ] = `${window.location.protocol}//${window.location.host}`;
-    config.validateStatus = (num) => num >= 200 && num < 300;
-    return config;
-  },
-  (error) => {
-    return Promise.reject("request error");
-  }
-);
+export async function request<T = any>(method: Method, params?: ReqParams): Promise<T | null> {
+  const baseHeaders = {
+    'Content-Type': 'application/json',
+    'short-url-origin': `${window.location.protocol}//${window.location.host}`,
+  };
+  const cfg: AxiosRequestConfig<T> = {
+    method: method,
+    url: params?.url,
+    headers: Object.assign(baseHeaders, params?.headers ?? {}),
+    params: params?.params,
+    data: params?.data,
+  };
 
-function getErrText(error: any): string {
-  if (error.data && error.data.message) {
-    return error.data.message;
-  } else if (error.data && typeof error.data == "string") {
-    return error.data;
-  } else {
-    return error.statusText;
+  try {
+    const res = await baseRequest.request(cfg);
+    return (res.data ?? {}) as T;
+  } catch (err) {
+    const error = err as AxiosError;
+    if (error.response) {
+      const res = error.response;
+      message.error(res.data?.message ?? `${res.status} ${res.statusText}`);
+    } else {
+      message.error((err as Error)?.message ?? '网络连接错误，请检查网络后重试');
+    }
+    return null;
   }
 }
 
-service.interceptors.response.use(
-  (res) => {
-    return res;
-  },
-  (error) => {
-    const res = error.response;
-    console.log("err", error.message, res);
-    if (!res) {
-      message.error("request error");
-    } else {
-      message.error(getErrText(res));
-    }
-    return Promise.reject(res);
-  }
-);
-
-export default service;
+export const post = <T = any>(ps?: ReqParams): Promise<T | null> => request('post', ps);
+export const get = <T = any>(ps?: ReqParams): Promise<T | null> => request('get', ps);
+export const patch = <T = any>(ps?: ReqParams): Promise<T | null> => request('patch', ps);
+export const delete_ = <T = any>(ps?: ReqParams): Promise<T | null> => request('delete', ps);
+export const put = <T = any>(ps?: ReqParams): Promise<T | null> => request('put', ps);
