@@ -23,10 +23,10 @@
             { validator: validateUrl, trigger: 'change' },
           ]"
         >
-          <a-input v-model:value="formData.url" />
+          <a-input v-model:value="formData.url" placeholder="long url" />
         </a-form-item>
 
-        <a-form-item label="Custom" name="custom">
+        <a-form-item label="Custom" name="custom" placeholder="custom key">
           <a-input v-model:value="formData.custom" />
         </a-form-item>
 
