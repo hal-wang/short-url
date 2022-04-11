@@ -36,10 +36,6 @@ export function setStartup<T extends Startup>(startup: T, dev: boolean): T {
     .useInject()
     .inject(CbappService, CbappService, InjectType.Singleton)
     .useReqDeco()
-    .use(async (ctx, next) => {
-      ctx.setHeader("h1", 1);
-      await next();
-    })
     .useRouter({
       dir: dev ? "src/actions" : "actions",
     });
