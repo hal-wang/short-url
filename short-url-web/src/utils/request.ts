@@ -11,12 +11,17 @@ export interface ReqParams {
   errorMessageMode?: ErrorMessageMode;
 }
 
-const apiUrl = import.meta.env.VITE_GLOB_API_URL;
-const apiProxyPrefix = import.meta.env.VITE_GLOB_API_PROXY_PREFIX;
+function getBaseUrl() {
+  if (import.meta.env.DEV) {
+    return import.meta.env.VITE_GLOB_API_PROXY_PREFIX;
+  } else {
+    const tcbEnv = (window as any)._tcbEnv;
+    return `https://${tcbEnv.TCB_SERVICE_DOMAIN}/${tcbEnv.API_NAME}`;
+  }
+}
 
-console.log('url', apiUrl, apiProxyPrefix);
 const baseRequest = axios.create({
-  baseURL: apiUrl + (apiProxyPrefix || ''),
+  baseURL: getBaseUrl(),
   timeout: 10 * 1000,
 });
 
