@@ -1,4 +1,10 @@
-import axios, { AxiosError, AxiosRequestConfig, AxiosRequestHeaders, Method } from 'axios';
+import axios, {
+  AxiosError,
+  AxiosRequestConfig,
+  AxiosRequestHeaders,
+  AxiosResponse,
+  Method,
+} from 'axios';
 import { message } from 'ant-design-vue';
 
 export type ErrorMessageMode = 'none' | 'modal' | 'message' | undefined;
@@ -44,7 +50,7 @@ export async function request<T = any>(method: Method, params?: ReqParams): Prom
   } catch (err) {
     const error = err as AxiosError;
     if (error.response) {
-      const res = error.response;
+      const res = error.response as AxiosResponse;
       message.error(res.data?.message ?? `${res.status} ${res.statusText}`);
     } else {
       message.error((err as Error)?.message ?? '网络连接错误，请检查网络后重试');
