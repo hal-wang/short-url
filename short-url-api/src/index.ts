@@ -17,9 +17,6 @@ const version = (() => {
 })();
 
 export function setStartup<T extends Startup>(startup: T, dev: boolean): T {
-  dotenv.config({
-    path: "./.env",
-  });
   if (dev) {
     dotenv.config({
       path: "./.env.local",

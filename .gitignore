@@ -1,7 +1,2 @@
-
-dist
-node_modules
-package-lock.json
-yarn.lock
-
-functions
+.env.local
+.env.*.local

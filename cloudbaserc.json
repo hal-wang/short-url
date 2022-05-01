@@ -9,7 +9,8 @@
       "preDeploy": {
         "type": "execCommand",
         "commands": [
-          "cd short-url-api && npm install --prefer-offline --no-audit --progress=false && npm run build"
+          "npm i -g yarn --force && yarn config set registry https://registry.npmjs.org",
+          "cd short-url-api && yarn install && yarn build"
         ]
       }
     },
@@ -31,8 +32,8 @@
       "web": {
         "use": "@cloudbase/framework-plugin-website",
         "inputs": {
-          "installCommand": "cd short-url-web && npm install --prefer-offline --no-audit --progress=false",
-          "buildCommand": "cd short-url-web && npm run build",
+          "installCommand": "cd short-url-web && yarn install",
+          "buildCommand": "cd short-url-web && yarn build",
           "outputPath": "short-url-web/dist"
         }
       },
