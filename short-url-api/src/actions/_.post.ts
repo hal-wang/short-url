@@ -1,5 +1,5 @@
 import { Inject } from "@sfajs/inject";
-import { Body } from "@sfajs/req-deco";
+import { Body } from "@sfajs/pipe";
 import { Action } from "@sfajs/router";
 import * as nanoid from "nanoid";
 import { CollectionService } from "../services/collection.service";

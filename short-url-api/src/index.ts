@@ -3,7 +3,6 @@ import { Startup } from "@sfajs/core";
 import { InjectType } from "@sfajs/inject";
 import "@sfajs/inject";
 import "@sfajs/router";
-import "@sfajs/req-deco";
 import * as fs from "fs";
 import { CbappService } from "./services/cbapp.service";
 import * as dotenv from "dotenv";
@@ -35,7 +34,6 @@ export function setStartup<T extends Startup>(startup: T, dev: boolean): T {
     })
     .useInject()
     .inject(CbappService, CbappService, InjectType.Singleton)
-    .useReqDeco()
     .useRouter({
       dir: dev ? "src/actions" : "actions",
     });
