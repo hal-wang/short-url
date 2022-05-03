@@ -1,4 +1,4 @@
-export function wrapperEnv(envConf: any): ImportMetaEnv {
+export function wrapperEnv(envConf: Record<string, any>): ViteEnv {
   const ret: any = {};
 
   for (const envName of Object.keys(envConf)) {

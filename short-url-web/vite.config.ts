@@ -5,8 +5,8 @@ import WindiCSS from 'vite-plugin-windicss';
 import PurgeIcons from 'vite-plugin-purge-icons';
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 import path from 'path';
-import { wrapperEnv } from './src/utils';
-import { createProxy } from './src/utils/proxy';
+import { createProxy } from './src/build/proxy';
+import { wrapperEnv } from './src/build/env';
 
 function pathResolve(dir: string) {
   return resolve(process.cwd(), '.', dir);
