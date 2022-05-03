@@ -25,5 +25,8 @@
     "email": "support@hal.wang"
   },
   "author": "hal-wang",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@cloudbase/cli": "^1.12.4"
+  }
 }
