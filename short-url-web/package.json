@@ -1,5 +1,6 @@
 {
   "name": "short-url-web",
+  "license": "MIT",
   "scripts": {
     "dev": "vite",
     "dev:test": "vite --mode test",
