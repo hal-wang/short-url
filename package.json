@@ -10,9 +10,9 @@
     "deploy": "tcb login && tcb framework deploy --mode local"
   },
   "keywords": [
-    "sfa",
-    "@sfajs/router",
-    "@sfajs/cloudbase",
+    "ipare",
+    "@ipare/router",
+    "@ipare/lambda",
     "short-url",
     "cloudbase",
     "restful-api",

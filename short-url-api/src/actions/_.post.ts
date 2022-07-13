@@ -1,7 +1,7 @@
-import { Inject } from "@sfajs/inject";
-import { Body } from "@sfajs/pipe";
-import { Action } from "@sfajs/router";
-import * as nanoid from "nanoid";
+import { Inject } from "@ipare/inject";
+import { Body } from "@ipare/pipe";
+import { Action } from "@ipare/router";
+import nanoid from "nanoid";
 import { CollectionService } from "../services/collection.service";
 import { CreateDto } from "./dtos/create-dto";
 

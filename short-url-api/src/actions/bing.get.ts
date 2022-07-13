@@ -1,4 +1,4 @@
-import { Action } from "@sfajs/router";
+import { Action } from "@ipare/router";
 import * as request from "request";
 
 export default class extends Action {

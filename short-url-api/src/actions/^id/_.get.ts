@@ -1,7 +1,7 @@
-import { Action } from "@sfajs/router";
-import UrlItem from "../../models/url-item";
+import { Action } from "@ipare/router";
+import UrlItem from "../../entities/url-item";
 import { readFileSync } from "fs";
-import { Inject } from "@sfajs/inject";
+import { Inject } from "@ipare/inject";
 import { CollectionService } from "../../services/collection.service";
 
 export default class extends Action {

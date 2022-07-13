@@ -1,42 +1,9 @@
-import { SfaCloudbase } from "@sfajs/cloudbase";
-import { Startup } from "@sfajs/core";
-import { InjectType } from "@sfajs/inject";
-import "@sfajs/inject";
-import "@sfajs/router";
-import * as fs from "fs";
-import { CbappService } from "./services/cbapp.service";
-import * as dotenv from "dotenv";
+import { LambdaStartup } from "@ipare/lambda";
+import "@ipare/inject";
+import "@ipare/router";
+import startup from "./startup";
 
-const version = (() => {
-  let path = "./package.json";
-  while (!fs.existsSync(path)) {
-    path = "../" + path;
-  }
-  const pkgStr = fs.readFileSync(path, "utf-8");
-  return JSON.parse(pkgStr).version;
-})();
-
-export function setStartup<T extends Startup>(startup: T, dev: boolean): T {
-  if (dev) {
-    dotenv.config({
-      path: "./.env.local",
-    });
-  }
-
-  return startup
-    .use(async (ctx, next) => {
-      ctx.res.setHeader("version", version);
-      ctx.res.setHeader("demo", "short-url");
-      await next();
-    })
-    .useInject()
-    .inject(CbappService, CbappService, InjectType.Singleton)
-    .useRouter({
-      dir: dev ? "src/actions" : "actions",
-    });
-}
-
-const startup = setStartup(new SfaCloudbase(), false);
+const app = startup(new LambdaStartup());
 export const main = async (
   event: Record<string, unknown>,
   context: Record<string, unknown>
@@ -44,5 +11,5 @@ export const main = async (
   console.log("event", JSON.stringify(event));
   console.log("context", JSON.stringify(context));
 
-  return await startup.run(event, context);
+  return await app.run(event, context);
 };
