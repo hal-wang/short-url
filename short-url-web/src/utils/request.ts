@@ -22,7 +22,7 @@ function getBaseUrl() {
     return import.meta.env.VITE_GLOB_API_PROXY_PREFIX;
   } else {
     const tcbEnv = (window as any)._tcbEnv;
-    return `https://${tcbEnv.TCB_SERVICE_DOMAIN}/${tcbEnv.API_NAME}`;
+    return `https://${tcbEnv.TCB_SERVICE_DOMAIN}`;
   }
 }
 
