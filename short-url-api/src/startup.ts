@@ -1,33 +1,17 @@
 import { Startup } from "@ipare/core";
 import "@ipare/inject";
 import "@ipare/router";
-import * as fs from "fs";
-import path from "path";
-import * as dotenv from "dotenv";
+import "@ipare/env";
 import { InjectType } from "@ipare/inject";
 import { CbappService } from "./services/cbapp.service";
+import { CollectionService } from "./services/collection.service";
 
-export default <T extends Startup>(startup: T, mode?: string) => {
-  const dev = mode == "development";
-  if (dev) {
-    dotenv.config({
-      path: "../.env.local",
-    });
-  }
-
+export default <T extends Startup>(startup: T, mode: string) => {
   return startup
-    .use(async (ctx, next) => {
-      ctx.res.setHeader("version", version);
-      ctx.res.setHeader("demo", "short-url");
-      await next();
-    })
+    .useVersion()
+    .useEnv(mode)
     .useInject()
-    .inject(CbappService, CbappService, InjectType.Singleton)
+    .inject(CollectionService, InjectType.Singleton)
+    .inject(CbappService, InjectType.Singleton)
     .useRouter();
 };
-
-const version = (() => {
-  const pkgPath = path.join(__dirname, "package.json");
-  const pkgStr = fs.readFileSync(pkgPath, "utf-8");
-  return JSON.parse(pkgStr).version;
-})();

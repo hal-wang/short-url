@@ -3,7 +3,7 @@ import "@ipare/inject";
 import "@ipare/router";
 import startup from "./startup";
 
-const app = startup(new LambdaStartup());
+const app = startup(new LambdaStartup(), "production");
 export const main = async (
   event: Record<string, unknown>,
   context: Record<string, unknown>
@@ -11,8 +11,5 @@ export const main = async (
   console.log("event", JSON.stringify(event));
   console.log("context", JSON.stringify(context));
 
-  (Object as any).hasOwn = (object: object, key: string) => {
-    return object.hasOwnProperty(key);
-  };
   return await app.run(event, context);
 };
