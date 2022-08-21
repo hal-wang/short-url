@@ -21,7 +21,8 @@
           "functionRootPath": "./short-url-api/dist",
           "functions": [
             {
-              "name": "v3"
+              "name": "v3",
+              "runtime": "Nodejs12.16"
             }
           ],
           "servicePaths": {
