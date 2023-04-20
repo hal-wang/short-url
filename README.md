@@ -19,11 +19,17 @@
 
 2. 配置 HTTP 访问服务
 
-   - 添加自定义域名，如 `s.hal.wang`
-   - 添加网页路径 `/w`（可选，不设置则不使用网站）
-     - 域名: `*`
-     - 触发路径: `/w`
-     - 关联资源: `staticstore` 静态网站托管
+- 添加自定义域名，如 `s.hal.wang`
+
+## 解决 CloudBase Framework Node.JS 版本过低问题
+
+截至目前， `CloudBase Framework` 最高仅支持 `Node.JS 12.16`，很多依赖已经无法正常使用了
+
+这将导致部署的云函数启动失败
+
+为了解决这个问题，你需要或先创建同名云函数再部署，创建云函数时选择 nodejs 版本为 `16.13` （目前最高的支持）
+
+或一键部署后删除 `todo` 云函数，然后再重建一个同名函数，然后再次部署。
 
 ## 注意事项
 
@@ -58,7 +64,7 @@ yarn install
 或在 `short-url-api` 目录下执行
 
 ```bash
-yarn dev
+yarn start
 ```
 
 ### Web
@@ -72,7 +78,7 @@ yarn install
 再执行下面命令运行
 
 ```bash
-yarn dev:test
+yarn start
 ```
 
 或使用已发布的接口，需要修改 `short-url-web/.env.development` 文件中的 `VITE_GLOB_PROXY_API_URL`
@@ -80,7 +86,7 @@ yarn dev:test
 然后运行
 
 ```bash
-yarn dev
+yarn start:stage
 ```
 
 ### 发布
