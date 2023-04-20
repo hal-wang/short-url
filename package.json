@@ -7,7 +7,7 @@
     "url": "https://github.com/hal-wang/short-url"
   },
   "scripts": {
-    "postinstall": "cd todo-web && yarn install && cd ../todo-api && yarn install",
+    "postinstall": "cd short-url-web && yarn install && cd ../short-url-api && yarn install",
     "deploy": "tcb login && tcb framework deploy --mode local",
     "start":"sh start.sh"
   },
@@ -29,6 +29,6 @@
   "author": "hal-wang",
   "license": "MIT",
   "devDependencies": {
-    "@cloudbase/cli": "^1.12.4"
+    "@cloudbase/cli": "^2.2.8"
   }
 }

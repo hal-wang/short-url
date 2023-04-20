@@ -12,7 +12,7 @@
           "npm i -g yarn --force && yarn config set registry https://registry.npmjs.org",
           "yarn install",
           "cd short-url-web && yarn build",
-          "cd short-url-api && && yarn build"
+          "cd short-url-api && yarn build"
         ]
       }
     },

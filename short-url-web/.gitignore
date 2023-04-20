@@ -27,5 +27,4 @@ pnpm-debug.log*
 
 
 *-error.log
-yarn.lock
 package-lock.json
