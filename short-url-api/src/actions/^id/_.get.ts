@@ -1,7 +1,7 @@
-import { Action } from "@ipare/router";
+import { Action } from "@halsp/router";
 import UrlItem from "../../entities/url-item";
 import { readFileSync } from "fs";
-import { Inject } from "@ipare/inject";
+import { Inject } from "@halsp/inject";
 import { CollectionService } from "../../services/collection.service";
 
 export default class extends Action {
@@ -13,8 +13,8 @@ export default class extends Action {
     if (!id) {
       return this.errMsg(404, "invalid id");
     }
-    if (id == "w" || id == "web") {
-      this.redirect("w/");
+    if (id == "w") {
+      await this.next();
       return;
     }
 

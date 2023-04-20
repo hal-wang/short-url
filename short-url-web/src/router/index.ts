@@ -3,7 +3,7 @@ import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
 import { PAGE_NOT_FOUND_ROUTE } from './basic';
 import { createProgressGuard } from './guard';
 
-const modules = import.meta.globEager('./modules/**/*.ts');
+const modules: Record<string, any> = import.meta.glob('./modules/**/*.ts', { eager: true });
 const routeModuleList: RouteRecordRaw[] = [PAGE_NOT_FOUND_ROUTE];
 Object.keys(modules).forEach((key) => {
   const mod = modules[key].default || {};

@@ -1,9 +1,14 @@
-import { Inject } from "@ipare/inject";
-import { Body } from "@ipare/pipe";
-import { Action } from "@ipare/router";
-import nanoid from "nanoid";
+import { Inject } from "@halsp/inject";
+import { Body } from "@halsp/pipe";
+import { Action } from "@halsp/router";
 import { CollectionService } from "../services/collection.service";
 import { CreateDto } from "./dtos/create-dto";
+
+const dynamicImport = new Function(
+  "specifier",
+  `return import(specifier);
+  `
+) as <T = any>(specifier: string) => Promise<T>;
 
 export default class extends Action {
   @Inject
@@ -69,7 +74,10 @@ export default class extends Action {
         return await this.getNewId(length + 1);
       }
 
-      const id = nanoid.nanoid(length);
+      const nanoidModule = await dynamicImport<typeof import("nanoid")>(
+        "nanoid"
+      );
+      const id = nanoidModule.nanoid(length);
       if (!(await this.isExist(id))) {
         return id;
       } else {

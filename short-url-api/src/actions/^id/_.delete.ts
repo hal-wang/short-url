@@ -1,5 +1,5 @@
-import { Inject } from "@ipare/inject";
-import { Action } from "@ipare/router";
+import { Inject } from "@halsp/inject";
+import { Action } from "@halsp/router";
 import { CollectionService } from "../../services/collection.service";
 
 export default class extends Action {

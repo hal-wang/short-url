@@ -1,0 +1,4 @@
+{
+  "preCommand": "",
+  "postCommand": "node templatePostCommand.js"
+}

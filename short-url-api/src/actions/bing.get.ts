@@ -1,4 +1,4 @@
-import { Action } from "@ipare/router";
+import { Action } from "@halsp/router";
 import * as request from "request";
 
 export default class extends Action {

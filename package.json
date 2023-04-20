@@ -7,12 +7,14 @@
     "url": "https://github.com/hal-wang/short-url"
   },
   "scripts": {
-    "deploy": "tcb login && tcb framework deploy --mode local"
+    "postinstall": "cd todo-web && yarn install && cd ../todo-api && yarn install",
+    "deploy": "tcb login && tcb framework deploy --mode local",
+    "start":"sh start.sh"
   },
   "keywords": [
-    "ipare",
-    "@ipare/router",
-    "@ipare/lambda",
+    "halsp",
+    "@halsp/router",
+    "@halsp/lambda",
     "short-url",
     "cloudbase",
     "restful-api",

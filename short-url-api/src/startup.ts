@@ -1,16 +1,20 @@
-import { Startup } from "@ipare/core";
-import "@ipare/inject";
-import "@ipare/router";
-import "@ipare/env";
-import "@ipare/logger";
-import { InjectType } from "@ipare/inject";
+import { HttpStartup } from "@halsp/http";
+import "@halsp/inject";
+import "@halsp/router";
+import "@halsp/logger";
+import "@halsp/static";
+import { InjectType } from "@halsp/inject";
 import { CbappService } from "./services/cbapp.service";
 import { CollectionService } from "./services/collection.service";
+import { getVersion } from "@halsp/env";
 
-export default <T extends Startup>(startup: T, mode: string) => {
+export default <T extends HttpStartup>(startup: T) => {
   return startup
-    .useVersion()
-    .useEnv(mode)
+    .use(async (ctx, next) => {
+      ctx.res.set("version", (await getVersion()) ?? "");
+      await next();
+    })
+    .useEnv()
     .useInject()
     .inject(CollectionService, InjectType.Singleton)
     .inject(CbappService, InjectType.Singleton)
@@ -21,5 +25,14 @@ export default <T extends Startup>(startup: T, mode: string) => {
       logger.info("context: " + JSON.stringify(ctx.lambdaContext));
       await next();
     })
-    .useRouter();
+    .useRouter()
+    .useStatic({
+      dir: "web",
+      prefix: "w",
+      listDir: false,
+      useIndex: true,
+      method: "GET",
+      useExt: true,
+      use404: true,
+    });
 };

@@ -61,6 +61,7 @@ export default ({ mode }: ConfigEnv): UserConfig => {
     },
     build: {
       sourcemap: true,
+      outDir: '../short-url-api/web',
     },
     server: {
       host: true,

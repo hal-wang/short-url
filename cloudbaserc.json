@@ -10,7 +10,9 @@
         "type": "execCommand",
         "commands": [
           "npm i -g yarn --force && yarn config set registry https://registry.npmjs.org",
-          "cd short-url-api && yarn install && yarn build"
+          "yarn install",
+          "cd short-url-web && yarn build",
+          "cd short-url-api && && yarn build"
         ]
       }
     },
@@ -21,21 +23,13 @@
           "functionRootPath": "./short-url-api/dist",
           "functions": [
             {
-              "name": "v3",
+              "name": "short-url",
               "runtime": "Nodejs12.16"
             }
           ],
           "servicePaths": {
-            "v3": "/"
+            "short-url": "/"
           }
-        }
-      },
-      "web": {
-        "use": "@cloudbase/framework-plugin-website",
-        "inputs": {
-          "installCommand": "cd short-url-web && yarn install",
-          "buildCommand": "cd short-url-web && yarn build",
-          "outputPath": "short-url-web/dist"
         }
       },
       "db": {
