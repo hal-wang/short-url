@@ -10,28 +10,28 @@
   },
   "dependencies": {
     "@cloudbase/node-sdk": "^2.10.0",
-    "@halsp/core": "^1.1.0",
-    "@halsp/env": "^1.1.0",
-    "@halsp/inject": "^1.1.0",
-    "@halsp/lambda": "^1.1.0",
-    "@halsp/logger": "^1.1.0",
-    "@halsp/pipe": "^1.1.0",
-    "@halsp/router": "^1.1.0",
-    "@halsp/static": "^1.1.0",
+    "@halsp/core": "^2.2.1",
+    "@halsp/env": "^2.2.1",
+    "@halsp/inject": "^2.2.1",
+    "@halsp/lambda": "^2.2.1",
+    "@halsp/logger": "^2.2.1",
+    "@halsp/pipe": "^2.2.1",
+    "@halsp/router": "^2.2.1",
+    "@halsp/static": "^2.2.1",
     "moment": "^2.29.4",
     "nanoid": "^4.0.2",
     "request": "^2.88.2"
   },
   "devDependencies": {
-    "@halsp/cli": "^0.3.0",
-    "@types/node": "^18.15.12",
+    "@halsp/cli": "^0.4.6",
+    "@types/node": "^20.3.3",
     "@types/request": "^2.48.8",
-    "@typescript-eslint/eslint-plugin": "^5.59.0",
-    "@typescript-eslint/parser": "^5.59.0",
-    "eslint": "^8.38.0",
+    "@typescript-eslint/eslint-plugin": "^5.61.0",
+    "@typescript-eslint/parser": "^5.61.0",
+    "eslint": "^8.44.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "prettier": "^2.8.7",
-    "typescript": "^5.0.4"
+    "prettier": "^2.8.8",
+    "typescript": "^5.1.6"
   }
 }

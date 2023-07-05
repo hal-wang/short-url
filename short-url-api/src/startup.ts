@@ -1,14 +1,15 @@
-import { HttpStartup } from "@halsp/http";
 import "@halsp/inject";
 import "@halsp/router";
 import "@halsp/logger";
 import "@halsp/static";
+import "@halsp/http";
 import { InjectType } from "@halsp/inject";
 import { CbappService } from "./services/cbapp.service";
 import { CollectionService } from "./services/collection.service";
 import { getVersion } from "@halsp/env";
+import { Startup } from "@halsp/core";
 
-export default <T extends HttpStartup>(startup: T) => {
+export default (startup: Startup) => {
   return startup
     .use(async (ctx, next) => {
       ctx.res.set("version", (await getVersion()) ?? "");
